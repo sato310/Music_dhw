@@ -18,10 +18,11 @@ import android.widget.ListView;
 public class MainActivity extends Activity {
 	
 	private Map<String, Integer> idsMap = new HashMap<String, Integer>();
-	private int[] resIds = new int[]{};
+	private int[] resIds = new int[]{R.raw.nc2422, R.raw.nc7400, R.raw.nc10100, R.raw.nc10812, R.raw.nc11577,
+			R.raw.nc13447, R.raw.nc20349, R.raw.nc20612, R.raw.nc29204};
 	
-	private String[] titles = new String[] {"nc2422", "nc7400", "nc10100", "nc10812", "nc11577",
-			"nc13447", "nc20349", "nc20612", "nc29204"};
+	private String[] titles = new String[] {"オルゴールBGM", "捨てられた雪原", "ループ用BGM008", "ループ用BGM026", "春の陽気",
+			"亡き王女の為のセプテット", "おてんば恋娘", "お茶の時間", "Starting Japan"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
