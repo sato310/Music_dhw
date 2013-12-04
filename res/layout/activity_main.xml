@@ -9,15 +9,36 @@
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="312dp"
-        android:layout_above="@+id/textView1"
+        android:layout_above="@+id/title"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:choiceMode="singleChoice" >
 
     </ListView>
+    
+<TextView
+    android:id="@+id/title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignTop="@+id/shuffle"
+    android:layout_marginLeft="99dp"
+    android:layout_marginTop="14dp"
+    android:text="Title" />
 
 <ImageButton
-    android:id="@+id/imageButton1"
+    android:id="@+id/shuffle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/next"
+    android:layout_alignLeft="@+id/next"
+    android:layout_marginBottom="12dp"
+    android:src="@drawable/shuffle" />
+
+    
+
+<ImageButton
+    android:id="@+id/next"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
@@ -27,47 +48,28 @@
     android:src="@drawable/next" />
 
 <ImageButton
-    android:id="@+id/imageButton3"
+    android:id="@+id/play"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignTop="@+id/imageButton1"
-    android:layout_marginRight="16dp"
-    android:layout_toLeftOf="@+id/imageButton1"
+    android:layout_alignTop="@+id/stop"
+    android:layout_toRightOf="@+id/stop"
     android:src="@drawable/play" />
 
 <ImageButton
-    android:id="@+id/imageButton2"
+    android:id="@+id/previous"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/textView1"
-    android:layout_marginRight="15dp"
-    android:layout_toLeftOf="@+id/imageButton5"
+    android:layout_alignParentLeft="true"
+    android:layout_alignTop="@+id/stop"
+    android:layout_marginLeft="20dp"
     android:src="@drawable/previous" />
 
 <ImageButton
-    android:id="@+id/imageButton5"
+    android:id="@+id/stop"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignRight="@+id/textView1"
-    android:layout_alignTop="@+id/imageButton2"
-    android:layout_marginRight="18dp"
+    android:layout_alignLeft="@+id/title"
+    android:layout_alignTop="@+id/next"
     android:src="@drawable/stop" />
-
-<TextView
-    android:id="@+id/textView1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_above="@+id/imageButton3"
-    android:layout_marginBottom="20dp"
-    android:layout_toLeftOf="@+id/imageButton3"
-    android:text="TextView" />
-
-<ImageButton
-    android:id="@+id/imageButton4"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_above="@+id/imageButton1"
-    android:layout_toRightOf="@+id/imageButton3"
-    android:src="@drawable/shuffle" />
 
 </RelativeLayout>

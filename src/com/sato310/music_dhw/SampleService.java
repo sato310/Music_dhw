@@ -17,18 +17,47 @@ public class SampleService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		int rawId = intent.getIntExtra("titleNow", 0);
-		// 前のActivityから"start"という文字列が渡された時
-		if (intent.getAction().equals("start")) {
-			// mediaPlayerが何もない状態であればcreateする
-			if (mediaPlayer == null) {
-				mediaPlayer = MediaPlayer.create(this, rawId);
+		// rawIdが0以外の時のみ実行
+		if (rawId != 0) {
+			// 前のActivityから"start"という文字列が渡された時
+			if (intent.getAction().equals("start")) {
+				// mediaPlayerが何もない状態であればcreateする
+				if (mediaPlayer == null) {
+					mediaPlayer = MediaPlayer.create(this, rawId);
+				}
+				if (mediaPlayer.isPlaying()) {
+					mediaPlayer.pause();
+					mediaPlayer = MediaPlayer.create(this, rawId);
+				} else {
+					mediaPlayer = MediaPlayer.create(this, rawId);
+					mediaPlayer.start();
+				}
+			} else if (intent.getAction().equals("next")) {
+				// mediaPlayerが何もない状態であればcreateする
+				if (mediaPlayer == null) {
+					mediaPlayer = MediaPlayer.create(this, rawId);
+				}
+				if (mediaPlayer.isPlaying()) {
+					mediaPlayer.pause();
+					mediaPlayer = MediaPlayer.create(this, rawId);
+					mediaPlayer.start();
+				} else {
+					mediaPlayer = MediaPlayer.create(this, rawId);
+					mediaPlayer.start();
+				}
+			} else if (intent.getAction().equals("stop")) {
+				// 曲が再生中なら停止する
+				if (mediaPlayer.isPlaying()) {
+					mediaPlayer.stop();
+					// mediaPlayerのメモリを開放する
+					mediaPlayer.release();
+					// mediaPlayerの変数も無くす
+					mediaPlayer = null;
+				}
 			}
-			if (mediaPlayer.isPlaying()) {
-				mediaPlayer.stop();
-				mediaPlayer = MediaPlayer.create(this, rawId);
-			}
-			mediaPlayer.start();
 		}
+		
+		
 		return super.onStartCommand(intent, flags, startId);
 	}
 	
