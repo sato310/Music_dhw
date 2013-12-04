@@ -76,16 +76,6 @@ public class SampleService extends Service implements OnCompletionListener {
 		mediaPlayer = mediaPlayer = MediaPlayer.create(this,
 				resIdList.get(setResNo));
 		mediaPlayer.start();
-		for (int i = 0; i < MainActivity.resIds.length; i++) {
-			if (MainActivity.setRes == MainActivity.resIds[i]) {
-				setResNo = i;
-				MainActivity.setMusicTitle = MainActivity.titles[setResNo];
-			}
-		}
-		// タイトルを設定
-		MainActivity.titleText.setText(MainActivity.setMusicTitle);
-		// ラジオボタンのチェック位置を変更する
-		MainActivity.listView.setItemChecked(setResNo, true);
 	}
 
 	// サービスがなくなる時に呼ばれるメソッド
