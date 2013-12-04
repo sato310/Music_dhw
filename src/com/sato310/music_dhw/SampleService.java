@@ -1,22 +1,30 @@
 package com.sato310.music_dhw;
 
+import java.util.ArrayList;
+
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.IBinder;
+import android.widget.Toast;
 
-public class SampleService extends Service {
+public class SampleService extends Service implements OnCompletionListener {
 
 	private MediaPlayer mediaPlayer;
+	private int setResNo;
+	private ArrayList<Integer> resIdList;
 
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
 	}
-	
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		int rawId = intent.getIntExtra("titleNow", 0);
+		int rawId = intent.getIntExtra("setRes", 0);
+		setResNo = intent.getIntExtra("setResNo", 0);
+		resIdList = intent.getIntegerArrayListExtra("resIdList");
 		// rawIdが0以外の時のみ実行
 		if (rawId != 0) {
 			// 前のActivityから"start"という文字列が渡された時
@@ -55,12 +63,31 @@ public class SampleService extends Service {
 					mediaPlayer = null;
 				}
 			}
+			// 曲の再生が終了した時に呼ばれる
+			mediaPlayer.setOnCompletionListener(this);
 		}
-		
-		
 		return super.onStartCommand(intent, flags, startId);
 	}
-	
+
+	// 再生終了イベントが発生すると呼ばれるメソッド, 次の曲へ移動
+	@Override
+	public void onCompletion(MediaPlayer mp) {
+		setResNo++;
+		mediaPlayer = mediaPlayer = MediaPlayer.create(this,
+				resIdList.get(setResNo));
+		mediaPlayer.start();
+		for (int i = 0; i < MainActivity.resIds.length; i++) {
+			if (MainActivity.setRes == MainActivity.resIds[i]) {
+				setResNo = i;
+				MainActivity.setMusicTitle = MainActivity.titles[setResNo];
+			}
+		}
+		// タイトルを設定
+		MainActivity.titleText.setText(MainActivity.setMusicTitle);
+		// ラジオボタンのチェック位置を変更する
+		MainActivity.listView.setItemChecked(setResNo, true);
+	}
+
 	// サービスがなくなる時に呼ばれるメソッド
 	@Override
 	public void onDestroy() {

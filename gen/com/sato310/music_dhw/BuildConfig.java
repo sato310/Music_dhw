@@ -2,5 +2,5 @@
 package com.sato310.music_dhw;
 
 public final class BuildConfig {
-    public final static boolean DEBUG = true;
+	public final static boolean DEBUG = true;
 }
